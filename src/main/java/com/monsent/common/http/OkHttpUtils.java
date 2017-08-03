@@ -527,16 +527,16 @@ public class OkHttpUtils {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
-		String json = "{\"username\":\"admin\",\"password:\"123456\"}";
-		HttpResult result = OkHttpUtils.postJsonSync("http://10.10.6.23:8080/router/user/login.do", json);
-		System.out.println(result.getRet());
+		String json = "{\"username\":\"admin\",\"password\":\"123456\"}";
+		HttpResult result = OkHttpUtils.postJsonSync("http://10.10.6.4:8080/router/user/login.do", json);
+		System.out.println(result.getBody());
 
 
 		OkHttpUtils.postJsonAsync("http://10.10.6.23:8080/router/user/login.do", json,
 				new OkHttpCallback() {
 
 					public void onSuccess(HttpResult result) {
-						System.out.println(result);
+						System.out.println(result.getBody());
 					}
 
 					public void onFailure(String msg) {
