@@ -264,12 +264,14 @@ public class OkHttpUtils {
                     result.setMsg(response.message());
                 }
                 if (callback != null) {
+                    callback.onFinished();
                     callback.onSuccess(result);
                 }
             }
 
             public void onFailure(Call call, IOException e) {
                 if (callback != null) {
+                    callback.onFinished();
                     callback.onFailure(e.getMessage());
                 }
             }
@@ -499,12 +501,14 @@ public class OkHttpUtils {
                     result.setMsg(response.message());
                 }
                 if (callback != null) {
+                    callback.onFinished();
                     callback.onSuccess(result);
                 }
             }
 
             public void onFailure(Call call, IOException e) {
                 if (callback != null) {
+                    callback.onFinished();
                     callback.onFailure(e.getMessage());
                 }
             }
@@ -537,8 +541,8 @@ public class OkHttpUtils {
 
     public static void main(String[] args) throws FileNotFoundException {
         String json = "{\"username\":\"admin\",\"password\":\"123456\"}";
-        HttpResult result = OkHttpUtils.postJsonSync("http://10.10.6.4:8080/router/user/login.do", json);
-        System.out.println(result.getBody());
+//        HttpResult result = OkHttpUtils.postJsonSync("http://10.10.6.4:8080/router/user/login.do", json);
+//        System.out.println(result.getBody());
 
 
         OkHttpUtils.postJsonAsync("http://10.10.6.23:8080/router/user/login.do", json,
@@ -551,6 +555,10 @@ public class OkHttpUtils {
                     public void onFailure(String msg) {
                         System.out.println(msg);
                     }
+
+                    public void onFinished() {
+                        System.out.println("34534534");
+                    }
                 });
 
         InputStream is = new FileInputStream(new File("F:\\srca.cer"));
@@ -562,6 +570,11 @@ public class OkHttpUtils {
 
             public void onFailure(String msg) {
                 System.out.println(msg);
+            }
+
+            @Override
+            public void onFinished() {
+                super.onFinished();
             }
         }, new InputStream[]{is});
     }

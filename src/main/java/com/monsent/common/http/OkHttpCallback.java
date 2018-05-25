@@ -3,9 +3,17 @@ package com.monsent.common.http;
 /**
  * Created by luojia on 2018/5/17.
  */
-public interface OkHttpCallback {
+public abstract class OkHttpCallback {
 
-    void onSuccess(HttpResult result);
+    public void onSuccess(HttpResult result) {
 
-    void onFailure(String msg);
+    }
+
+    public void onFailure(String msg) {
+
+    }
+
+    public void onFinished() {
+
+    }
 }
